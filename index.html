@@ -30,11 +30,9 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Оптимизированные анимации фона */
+        /* Анимированный фон */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -43,19 +41,21 @@
             height: 100%;
             z-index: -2;
             opacity: 0.3;
-            pointer-events: none;
-            will-change: transform;
         }
 
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            transform: translateZ(0);
-            backface-visibility: hidden;
+            animation: twinkle var(--duration) infinite alternate;
         }
 
-        /* Оптимизированный снег */
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Снег */
         #snow {
             position: fixed;
             top: 0;
@@ -64,7 +64,6 @@
             height: 100%;
             pointer-events: none;
             z-index: 1000;
-            contain: layout;
         }
 
         .snowflake {
@@ -72,8 +71,7 @@
             background: white;
             border-radius: 50%;
             opacity: 0.8;
-            filter: blur(0.5px);
-            transform: translateZ(0);
+            filter: blur(1px);
         }
 
         /* Главный контейнер */
@@ -85,7 +83,7 @@
             z-index: 10;
         }
 
-        /* Оптимизированная гирлянда */
+        /* Анимированная гирлянда */
         .garland-container {
             position: fixed;
             top: 0;
@@ -96,7 +94,6 @@
             height: 100%;
             z-index: 5;
             pointer-events: none;
-            contain: layout;
         }
 
         .garland-line {
@@ -112,24 +109,34 @@
                 var(--accent) 30%,
                 transparent 40%
             );
-            background-size: 100% 200px;
-            animation: garlandFlow 8s infinite linear;
-            transform: translateZ(0);
+            animation: garlandFlow 4s infinite linear;
         }
 
         @keyframes garlandFlow {
             0% { background-position: 0 0; }
-            100% { background-position: 0 200px; }
+            100% { background-position: 0 100px; }
         }
 
+        /* Шарики гирлянды */
         .garland-ball {
             position: absolute;
             width: 12px;
             height: 12px;
             border-radius: 50%;
             left: 50%;
-            transform: translateX(-50%) translateZ(0);
-            backface-visibility: hidden;
+            transform: translateX(-50%);
+            animation: ballGlow 2s infinite alternate;
+        }
+
+        @keyframes ballGlow {
+            0% { 
+                box-shadow: 0 0 5px currentColor, 0 0 10px currentColor; 
+                transform: translateX(-50%) scale(1);
+            }
+            100% { 
+                box-shadow: 0 0 15px currentColor, 0 0 25px currentColor; 
+                transform: translateX(-50%) scale(1.2);
+            }
         }
 
         /* Заголовок */
@@ -154,18 +161,41 @@
                 0 0 40px #2ecc71,
                 0 0 60px #2ecc71;
             animation: treeGlow 3s infinite alternate;
-            transform: translateZ(0);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tree-lights {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .tree-light {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: lightTwinkle 1.5s infinite alternate;
         }
 
         @keyframes treeGlow {
             0% { 
                 text-shadow: 0 0 20px #2ecc71, 0 0 40px #2ecc71;
-                transform: scale(1) translateZ(0);
+                transform: scale(1);
             }
             100% { 
                 text-shadow: 0 0 30px #2ecc71, 0 0 60px #2ecc71, 0 0 80px #2ecc71;
-                transform: scale(1.05) translateZ(0);
+                transform: scale(1.05);
             }
+        }
+
+        @keyframes lightTwinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
         }
 
         .greeting {
@@ -178,7 +208,17 @@
             margin: 20px 0;
             position: relative;
             display: inline-block;
-            transform: translateZ(0);
+        }
+
+        .greeting::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
         .subtitle {
@@ -192,7 +232,7 @@
         /* Карточки воспоминаний */
         .memory {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 35px;
             margin-bottom: 50px;
@@ -202,16 +242,48 @@
                 0 15px 35px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            transform: translateZ(0);
-            will-change: transform;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
         .memory:hover {
-            transform: translateY(-5px) translateZ(0);
+            transform: translateY(-10px);
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 25px 50px rgba(0, 0, 0, 0.7),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .memory::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+
+        .memory-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .memory:hover .memory-glow {
+            opacity: 0.5;
+        }
+
+        .memory-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .text {
@@ -220,6 +292,8 @@
             color: rgba(255, 255, 255, 0.9);
             margin: 25px 0;
             text-align: justify;
+            position: relative;
+            z-index: 2;
         }
 
         /* Фотографии */
@@ -228,19 +302,41 @@
             width: 100%;
             max-width: 600px;
             margin: 30px auto;
+            perspective: 1000px;
         }
 
         .photo-frame {
             position: relative;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             border-radius: 20px;
-            transition: transform 0.3s ease;
-            transform: translateZ(0);
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
         }
 
         .photo-frame:hover {
-            transform: scale(1.01) translateZ(0);
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--primary));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.5;
+            animation: frameGlow 4s linear infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes frameGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .photo {
@@ -248,7 +344,11 @@
             border-radius: 15px;
             display: block;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            transform: translateZ(0);
+            transition: transform 0.5s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.02);
         }
 
         .photo-placeholder {
@@ -266,43 +366,94 @@
             overflow: hidden;
         }
 
-        /* Финальное сообщение с пасхалкой */
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            animation: placeholderShine 3s infinite linear;
+        }
+
+        @keyframes placeholderShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Финальное сообщение с новой структурой */
         .love-section {
             text-align: center;
             padding: 80px 20px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .heart-click-hint {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+        /* Новый контейнер для сердечка и надписи */
+        .heart-interactive-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Контейнер с вертикальным текстом */
+        .vertical-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .click-hint {
+            color: var(--accent);
+            font-size: 1.2rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
             gap: 10px;
-            opacity: 0.8;
             animation: hintPulse 2s infinite;
+            white-space: nowrap;
         }
 
         @keyframes hintPulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
+            0%, 100% { 
+                opacity: 0.7; 
+                transform: rotate(180deg) scale(1); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: rotate(180deg) scale(1.1); 
+            }
         }
 
+        .click-hint i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* Сердечко */
         .heart-container {
             position: relative;
             width: 180px;
             height: 180px;
-            margin: 0 auto 40px;
             cursor: pointer;
             transition: transform 0.3s ease;
-            transform: translateZ(0);
+            flex-shrink: 0;
         }
 
         .heart-container:hover {
-            transform: scale(1.05) translateZ(0);
+            transform: scale(1.1);
         }
 
         .heart {
@@ -312,18 +463,11 @@
             width: 100%;
             height: 100%;
             background: var(--primary);
-            transform: rotate(45deg) translateZ(0);
-            animation: heartbeat 2s ease-in-out infinite;
+            transform: rotate(45deg);
+            animation: heartbeat 1.5s ease-in-out infinite;
             box-shadow: 
-                0 0 30px var(--primary),
-                0 0 60px rgba(255, 51, 102, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .heart-container:hover .heart {
-            box-shadow: 
-                0 0 40px var(--primary),
-                0 0 80px var(--primary);
+                0 0 50px var(--primary),
+                0 0 100px var(--primary);
         }
 
         .heart::before,
@@ -347,11 +491,43 @@
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: rotate(45deg) scale(1) translateZ(0); }
-            50% { transform: rotate(45deg) scale(1.1) translateZ(0); }
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
         }
 
-        /* Секретная фотография (изначально скрыта) */
+        /* Сообщение любви */
+        .love-messages {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .love-message {
+            font-size: 3.5rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+            text-shadow: 
+                0 0 20px var(--primary),
+                0 0 40px var(--primary);
+            margin: 10px 0;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        .pronunciation {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
+            100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary), 0 0 80px var(--primary); }
+        }
+
+        /* Секретная фотография */
         .secret-photo-container {
             max-width: 600px;
             margin: 40px auto 0;
@@ -376,6 +552,7 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 25px;
             border: 2px solid var(--accent);
+            box-shadow: 0 0 40px rgba(255, 204, 0, 0.2);
         }
 
         .secret-photo {
@@ -393,39 +570,69 @@
             font-size: 1.1rem;
         }
 
-        .love-message {
-            font-size: 3.5rem;
-            font-family: 'Dancing Script', cursive;
-            color: var(--primary);
-            text-shadow: 
-                0 0 20px var(--primary),
-                0 0 40px var(--primary);
-            margin: 30px 0;
-            animation: textGlow 2s infinite alternate;
-            transform: translateZ(0);
+        .signature {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-style: italic;
+            opacity: 0.8;
+            margin-top: 40px;
         }
 
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
-            100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary); }
+        /* Время Екатеринбург - Шанхай */
+        .time-display {
+            margin-top: 40px;
+            opacity: 0.6;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        /* Оптимизированные парящие элементы */
+        .time-display i {
+            color: var(--secondary);
+        }
+
+        .cities {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .city {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .city-icon {
+            font-size: 1.2rem;
+        }
+
+        .separator {
+            color: var(--accent);
+        }
+
+        /* Парящие элементы */
         .floating-elements {
             position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            contain: layout;
         }
 
         .floating-element {
             position: absolute;
             font-size: 24px;
             opacity: 0.3;
-            transform: translateZ(0);
-            backface-visibility: hidden;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
         }
 
         /* Адаптивность */
@@ -454,6 +661,28 @@
                 width: 150px;
                 height: 150px;
             }
+            
+            .heart-interactive-container {
+                gap: 20px;
+                flex-direction: column;
+            }
+            
+            .click-hint {
+                writing-mode: horizontal-tb;
+                transform: none;
+                margin-bottom: 0;
+                margin-right: 0;
+                margin-left: 0;
+            }
+            
+            .click-hint i {
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+            
+            .vertical-text-container {
+                order: -1;
+            }
         }
 
         @media (max-width: 480px) {
@@ -463,6 +692,10 @@
             
             .love-message {
                 font-size: 2.2rem;
+            }
+            
+            .pronunciation {
+                font-size: 1.5rem;
             }
             
             .tree {
@@ -477,30 +710,31 @@
                 padding: 10px;
             }
             
-            .heart-click-hint {
+            .heart-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .click-hint {
                 font-size: 1rem;
+            }
+            
+            .cities {
                 flex-direction: column;
                 gap: 5px;
             }
-        }
-
-        /* Улучшенная производительность анимаций */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            
+            .separator {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Оптимизированный анимированный фон -->
+    <!-- Анимированный фон -->
     <div class="bg-animation" id="bgAnimation"></div>
     
-    <!-- Оптимизированный снег -->
+    <!-- Снег -->
     <div id="snow"></div>
     
     <!-- Парящие элементы -->
@@ -513,277 +747,283 @@
         <!-- Заголовок -->
         <div class="header">
             <div class="tree-container">
+                <div class="tree-lights" id="treeLights"></div>
                 <div class="tree">🎄</div>
             </div>
-            <h1 class="greeting">HAPPY NEW YEAR</h1>
-            <p class="subtitle">Наше путешествие начинается здесь...</p>
+            <h1 class="greeting">新年快乐，宝宝</h1>
+            <p class="subtitle">我们的爱从这里开始...</p>
         </div>
         
         <!-- Первое воспоминание -->
         <div class="memory">
+            <div class="memory-glow"></div>
+            <div class="memory-date">我们的相识</div>
+            
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 1 ЗДЕСЬ -->
-                С Новым Годом, моя дорогая! Помню тот день, когда мы впервые начали разговаривать. Ты была такой застенчивой и милой...
+                新年快乐，我亲爱的！还记得我们第一次开始交谈的那一天吗。你是如此害羞和可爱...
             </p>
             
             <div class="photo-container">
                 <div class="photo-frame">
                     <!-- ВСТАВЬТЕ ФОТО 1 ЗДЕСЬ -->
-                    <!-- <img src="photo1.jpg" class="photo" alt="Наше первое фото"> -->
-                    <div class="photo-placeholder">
-                        <i class="fas fa-heartbeat" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
-                        <div>Ваше первое фото</div>
-                        <div style="font-size: 0.9rem; margin-top: 10px;">(Загрузите своё фото)</div>
-                    </div>
+                    <img src="1.jpg" class="photo" alt="Наше первое фото">
+
                 </div>
             </div>
             
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 2 ЗДЕСЬ -->
-                Твой смех стал самой красивой музыкой в моей жизни. Каждый раз, когда ты пишешь мне, мой мир становится ярче...
+                你的笑声成了我生命中最美的音乐。每次你写信息给我，我的世界都变得更加明亮...
             </p>
         </div>
         
         <!-- Второе воспоминание -->
         <div class="memory">
+            <div class="memory-glow"></div>
+            <div class="memory-date">美妙的夜晚</div>
+            
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 3 ЗДЕСЬ -->
-                Помнишь ту ночь, когда мы говорили до самого утра? Ты рассказывала о своих мечтах, а я слушал, затаив дыхание...
+                还记得我们彻夜长谈的那些夜晚吗？和你在一起的时光让我感到无比幸福...
             </p>
             
             <div class="photo-container">
                 <div class="photo-frame">
                     <!-- ВСТАВЬТЕ ФОТО 2 ЗДЕСЬ -->
-                    <!-- <img src="photo2.jpg" class="photo" alt="Наша беседа"> -->
-                    <div class="photo-placeholder">
-                        <i class="fas fa-star" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
-                        <div>Ваше особенное фото</div>
-                        <div style="font-size: 0.9rem; margin-top: 10px;">(Загрузите своё фото)</div>
-                    </div>
+                    <img src="2.jpg" class="photo" alt="Наша беседа">
+
                 </div>
             </div>
             
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 4 ЗДЕСЬ -->
-                Ты говорила о звёздах, и в тот момент я понял — ты и есть самая яркая звезда в моей вселенной...
+                你已成为我生命的一部分。你的每一个故事都留在了我的心里...
             </p>
         </div>
         
         <!-- Третье воспоминание -->
         <div class="memory">
+            <div class="memory-glow"></div>
+            <div class="memory-date">共同的未来</div>
+            
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 5 ЗДЕСЬ -->
-                В новом году я мечтаю о том дне, когда мы наконец встретимся. Представляю, как крепко обниму тебя и никогда не отпущу...
+                在新的一年里，我梦想着终于见到你的那一天。想象着紧紧拥抱你，永远不放手...
             </p>
             
             <div class="photo-container">
                 <div class="photo-frame">
                     <!-- ВСТАВЬТЕ ФОТО 3 ЗДЕСЬ -->
-                    <!-- <img src="photo3.jpg" class="photo" alt="Наше будущее"> -->
-                    <div class="photo-placeholder">
-                        <i class="fas fa-gem" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                        <div>Фото вашей мечты</div>
-                        <div style="font-size: 0.9rem; margin-top: 10px;">(Загрузите своё фото)</div>
-                    </div>
+                    <img src="3.jpg" class="photo" alt="Наше будущее">
+
                 </div>
             </div>
             
             <p class="text">
                 <!-- ВСТАВЬТЕ ТЕКСТ 6 ЗДЕСЬ -->
-                Расстояние — это всего лишь проверка наших чувств. И каждый день доказывает, что наша любовь сильнее любых километров...
+                距离只是对我们感情的考验。每一天都证明着，我们的爱比任何距离都更强大...
             </p>
         </div>
         
         <!-- Финальное сообщение с пасхалкой -->
         <div class="love-section">
-            <!-- Подсказка для пасхалки -->
-            <div class="heart-click-hint" id="heartHint">
-                <i class="fas fa-hand-point-down"></i>
-                <span>Нажми на сердечко — откроется сюрприз!</span>
-                <i class="fas fa-hand-point-down"></i>
+            <!-- Интерактивная область с сердечком и подсказкой -->
+            <div class="heart-interactive-container">
+                <!-- Контейнер с вертикальным текстом -->
+                <div class="vertical-text-container">
+                    <div class="click-hint" id="heartHint">
+                        <i class="fas fa-hand-point-right"></i>
+                        点击心形
+                        <i class="fas fa-hand-point-left"></i>
+                    </div>
+                </div>
+                
+                <!-- Интерактивное сердечко -->
+                <div class="heart-container" id="secretHeart" title="Открой сюрприз!">
+                    <div class="heart"></div>
+                </div>
             </div>
             
-            <!-- Интерактивное сердечко -->
-            <div class="heart-container" id="secretHeart" title="Нажми на меня!">
-                <div class="heart"></div>
+            <!-- Сообщения любви -->
+            <div class="love-messages">
+                <div class="love-message">我爱你</div>
+                <div class="pronunciation">Wǒ ài nǐ</div>
             </div>
-            
-            <!-- Основное сообщение -->
-            <div class="love-message">我爱你</div>
-            <div class="love-message" style="font-size: 2rem; margin-top: -10px;">Wǒ ài nǐ</div>
             
             <!-- Секретная фотография (скрыта изначально) -->
             <div class="secret-photo-container" id="secretPhotoContainer">
                 <div class="secret-photo-frame">
                     <!-- ВСТАВЬТЕ СЕКРЕТНУЮ ФОТОГРАФИЮ ЗДЕСЬ -->
-                    <!-- <img src="secret_photo.jpg" class="secret-photo" alt="Секретный сюрприз!"> -->
-                    <div class="photo-placeholder" style="height: 400px;">
-                        <i class="fas fa-lock-open" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
-                        <div>Ваша секретная фотография</div>
-                        <div style="font-size: 0.9rem; margin-top: 10px; max-width: 300px;">
-                            Загрузите самое особенное фото, которое откроется только при клике на сердечко
-                        </div>
-                    </div>
+                    <img src="secret.jpg" class="secret-photo" alt="Секретный сюрприз!">
+                    
                     <div class="secret-caption">
-                        Самый особенный момент, который я храню в своём сердце...
+                        我们一定会在生活中拍下这张照片...
                     </div>
                 </div>
             </div>
             
-            <p class="signature" style="margin-top: 40px;">
-                Навсегда твой<br>
-                <span style="color: var(--light);">[Вставьте ваше имя]</span>
+            <!-- Подпись -->
+            <p class="signature">
+                永远属于你的<br>
+                <span style="color: var(--light);">Danya</span>
             </p>
             
-            <div style="margin-top: 40px; opacity: 0.6; font-size: 0.9rem;">
-                <i class="fas fa-music" style="margin-right: 10px;"></i>
-                <span id="currentTime">00:00</span> | Москва - Пекин
+            <!-- Время Екатеринбург - Шанхай -->
+            <div class="time-display">
+                <i class="fas fa-clock"></i>
+                <div class="cities">
+                    <div class="city">
+                        <span class="city-icon">🏰</span>
+                        <span id="ekaterinburgTime">00:00</span>
+                        <span>Екатеринбург</span>
+                    </div>
+                    <div class="separator">—</div>
+                    <div class="city">
+                        <span class="city-icon">🏮</span>
+                        <span id="shanghaiTime">00:00</span>
+                        <span>Шанхай</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Оптимизированная версия - меньше анимаций, лучше производительность
+        // Инициализация всех эффектов
         document.addEventListener('DOMContentLoaded', function() {
-            // Инициализация только после полной загрузки страницы
-            setTimeout(initializeEffects, 100);
-        });
-
-        function initializeEffects() {
-            // 1. Звёздное небо (упрощённое)
+            // 1. Звёздное небо
             createStars();
             
-            // 2. Оптимизированный снег
-            createOptimizedSnow();
+            // 2. Снегопад
+            createSnow();
             
-            // 3. Упрощённая гирлянда
-            createSimpleGarland();
+            // 3. Гирлянда
+            createGarland();
             
-            // 4. Парящие элементы (меньше количество)
+            // 4. Огни на ёлке
+            createTreeLights();
+            
+            // 5. Парящие элементы
             createFloatingElements();
             
-            // 5. Обновление времени
+            // 6. Обновление времени Екатеринбург-Шанхай
             updateTime();
             
-            // 6. Пасхалка - обработчик клика на сердце
+            // 7. Пасхалка - обработчик клика на сердце
             setupEasterEgg();
             
-            // 7. Оптимизированные эффекты прокрутки
-            setupOptimizedScroll();
-        }
+            // 8. Эффекты при прокрутке
+            setupScrollEffects();
+        });
 
-        // 1. Упрощённые звёзды
+        // 1. Создание звёздного неба
         function createStars() {
             const container = document.getElementById('bgAnimation');
-            const starCount = 50; // Уменьшено количество
+            const starCount = 150;
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                star.style.width = `${Math.random() * 2 + 1}px`;
-                star.style.height = star.style.width;
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
                 star.style.left = `${Math.random() * 100}vw`;
                 star.style.top = `${Math.random() * 100}vh`;
-                star.style.opacity = Math.random() * 0.5 + 0.2;
-                
-                // Простая анимация
-                star.animate([
-                    { opacity: star.style.opacity },
-                    { opacity: parseFloat(star.style.opacity) * 1.5 },
-                    { opacity: star.style.opacity }
-                ], {
-                    duration: Math.random() * 4000 + 2000,
-                    iterations: Infinity,
-                    easing: 'ease-in-out'
-                });
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
                 
                 container.appendChild(star);
             }
         }
 
-        // 2. Оптимизированный снег
-        function createOptimizedSnow() {
+        // 2. Создание снега
+        function createSnow() {
             const snowContainer = document.getElementById('snow');
-            const snowflakeCount = 50; // Уменьшено количество
+            const snowflakeCount = 80;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 
-                const size = Math.random() * 4 + 1;
+                const size = Math.random() * 5 + 2;
                 snowflake.style.width = `${size}px`;
                 snowflake.style.height = `${size}px`;
                 snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.opacity = Math.random() * 0.4 + 0.1;
+                snowflake.style.opacity = Math.random() * 0.6 + 0.2;
                 
-                const duration = Math.random() * 20 + 20;
+                const duration = Math.random() * 10 + 10;
                 const delay = Math.random() * 5;
                 
-                // Используем CSS анимации вместо JS
-                snowflake.style.animation = `snowFall ${duration}s linear ${delay}s infinite`;
+                snowflake.animate([
+                    { transform: 'translateY(-100px) rotate(0deg)', opacity: 0 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${360 * (Math.random() > 0.5 ? 1 : -1)}deg)`, opacity: 0.3 }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity
+                });
                 
                 snowContainer.appendChild(snowflake);
             }
-            
-            // Добавляем CSS для анимации снега
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes snowFall {
-                    0% { 
-                        transform: translateY(-100px) translateX(0) rotate(0deg); 
-                        opacity: 0; 
-                    }
-                    10% { opacity: ${Math.random() * 0.4 + 0.1}; }
-                    90% { opacity: ${Math.random() * 0.4 + 0.1}; }
-                    100% { 
-                        transform: translateY(${window.innerHeight + 100}px) 
-                                 translateX(${Math.random() * 100 - 50}px) 
-                                 rotate(${360 * (Math.random() > 0.5 ? 1 : -1)}deg); 
-                        opacity: 0; 
-                    }
-                }
-            `;
-            document.head.appendChild(style);
         }
 
-        // 3. Упрощённая гирлянда
-        function createSimpleGarland() {
+        // 3. Создание гирлянды
+        function createGarland() {
             const container = document.getElementById('garlandContainer');
-            const ballCount = 12; // Уменьшено количество
+            const ballCount = 15;
+            
+            // Линия гирлянды
+            const line = document.createElement('div');
+            line.className = 'garland-line';
+            container.appendChild(line);
             
             // Шарики гирлянды
             for (let i = 0; i < ballCount; i++) {
                 const ball = document.createElement('div');
                 ball.className = 'garland-ball';
                 
-                const colors = ['#ff3366', '#00ccff', '#ffcc00'];
-                const color = colors[i % colors.length];
+                const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa', '#cc66ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 ball.style.backgroundColor = color;
                 ball.style.top = `${(i / ballCount) * 100}%`;
-                
-                // Мерцание
-                ball.animate([
-                    { opacity: 0.5, boxShadow: `0 0 5px ${color}` },
-                    { opacity: 1, boxShadow: `0 0 15px ${color}, 0 0 25px ${color}` },
-                    { opacity: 0.5, boxShadow: `0 0 5px ${color}` }
-                ], {
-                    duration: 2000,
-                    delay: i * 200,
-                    iterations: Infinity,
-                    easing: 'ease-in-out'
-                });
+                ball.style.animationDelay = `${Math.random() * 2}s`;
+                ball.style.setProperty('--color', color);
                 
                 container.appendChild(ball);
             }
         }
 
-        // 4. Парящие элементы (упрощённые)
+        // 4. Огни на ёлке
+        function createTreeLights() {
+            const container = document.getElementById('treeLights');
+            const lightCount = 20;
+            
+            for (let i = 0; i < lightCount; i++) {
+                const light = document.createElement('div');
+                light.className = 'tree-light';
+                
+                const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa', '#ffffff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                light.style.backgroundColor = color;
+                light.style.left = `${Math.random() * 100}%`;
+                light.style.top = `${Math.random() * 100}%`;
+                light.style.animationDelay = `${Math.random() * 2}s`;
+                light.style.setProperty('--color', color);
+                
+                container.appendChild(light);
+            }
+        }
+
+        // 5. Парящие элементы
         function createFloatingElements() {
             const container = document.getElementById('floatingElements');
-            const elements = ['❄️', '✨', '💖'];
-            const count = 8; // Уменьшено количество
+            const elements = ['❄️', '✨', '🌟', '🎀', '💫', '🎈', '💖', '🎇'];
+            const count = 15;
             
             for (let i = 0; i < count; i++) {
                 const element = document.createElement('div');
@@ -791,38 +1031,28 @@
                 element.textContent = elements[Math.floor(Math.random() * elements.length)];
                 
                 element.style.left = `${Math.random() * 100}vw`;
-                element.style.fontSize = `${Math.random() * 15 + 10}px`;
-                element.style.opacity = Math.random() * 0.2 + 0.1;
-                
-                const duration = Math.random() * 40 + 40;
-                element.style.animation = `float ${duration}s linear infinite`;
+                element.style.fontSize = `${Math.random() * 20 + 15}px`;
+                element.style.opacity = Math.random() * 0.3 + 0.1;
+                element.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                element.style.animationDelay = `${Math.random() * 10}s`;
                 
                 container.appendChild(element);
             }
-            
-            // Добавляем CSS для анимации
-            const floatStyle = document.createElement('style');
-            floatStyle.textContent = `
-                @keyframes float {
-                    0% { 
-                        transform: translateY(100vh) rotate(0deg) translateZ(0); 
-                    }
-                    100% { 
-                        transform: translateY(-100px) rotate(${360 * (Math.random() > 0.5 ? 1 : -1)}deg) translateZ(0); 
-                    }
-                }
-            `;
-            document.head.appendChild(floatStyle);
         }
 
-        // 5. Обновление времени
+        // 6. Обновление времени Екатеринбург-Шанхай
         function updateTime() {
-            const timeElement = document.getElementById('currentTime');
+            const ekbElement = document.getElementById('ekaterinburgTime');
+            const shElement = document.getElementById('shanghaiTime');
             
             function update() {
                 const now = new Date();
-                const moscowTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Moscow"}));
-                const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+                
+                // Время Екатеринбурга (UTC+5)
+                const ekbTime = new Date(now.getTime() + (0 * 60 * 60 * 1000));
+                
+                // Время Шанхая (UTC+8)
+                const shTime = new Date(now.getTime() + (2 * 60 * 60 * 1000));
                 
                 const formatTime = (date) => {
                     return date.toLocaleTimeString('ru-RU', { 
@@ -832,14 +1062,26 @@
                     });
                 };
                 
-                timeElement.textContent = `${formatTime(moscowTime)} | ${formatTime(beijingTime)}`;
+                ekbElement.textContent = formatTime(ekbTime);
+                shElement.textContent = formatTime(shTime);
+                
+                // Добавляем мерцание каждую минуту
+                if (now.getSeconds() === 0) {
+                    ekbElement.style.color = 'var(--accent)';
+                    shElement.style.color = 'var(--accent)';
+                    
+                    setTimeout(() => {
+                        ekbElement.style.color = '';
+                        shElement.style.color = '';
+                    }, 500);
+                }
             }
             
             update();
-            setInterval(update, 60000);
+            setInterval(update, 1000); // Обновлять каждую секунду
         }
 
-        // 6. Пасхалка - клик на сердце
+        // 7. Пасхалка - клик на сердце
         function setupEasterEgg() {
             const heart = document.getElementById('secretHeart');
             const secretContainer = document.getElementById('secretPhotoContainer');
@@ -866,45 +1108,57 @@
                     // Эффект для сердечка
                     heart.animate([
                         { transform: 'scale(1)' },
-                        { transform: 'scale(1.2)' },
+                        { transform: 'scale(1.3)' },
                         { transform: 'scale(1)' }
                     ], {
                         duration: 500,
                         easing: 'ease-in-out'
                     });
                     
-                    // Скрываем подсказку
-                    heartHint.style.opacity = '0';
-                    heartHint.style.transform = 'scale(0.8)';
-                    setTimeout(() => heartHint.style.display = 'none', 500);
+                    // Анимация подсказки
+                    heartHint.animate([
+                        { opacity: 1, transform: 'rotate(180deg) scale(1)' },
+                        { opacity: 0, transform: 'rotate(180deg) scale(0.5)' }
+                    ], {
+                        duration: 500,
+                        easing: 'ease-out'
+                    }).onfinish = () => {
+                        heartHint.style.display = 'none';
+                    };
                     
                     // Создаём эффект конфетти
                     createEasterEggConfetti();
                     
+                    // Воспроизводим звуковой эффект (вибрация на мобильных)
+                    if (navigator.vibrate) {
+                        navigator.vibrate([100, 50, 100]);
+                    }
+                    
                     isRevealed = true;
                     
-                    // Меняем курсор на обычный
+                    // Меняем курсор
                     heart.style.cursor = 'default';
                     
-                    // Сохраняем в localStorage, что пасхалка открыта
+                    // Сохраняем в localStorage
                     try {
                         localStorage.setItem('easterEggRevealed', 'true');
+                        localStorage.setItem('easterEggDate', new Date().toISOString());
                     } catch (e) {
                         // Игнорируем ошибки localStorage
                     }
                 }
             });
             
-            // Добавляем подсказку при наведении
+            // Анимация подсказки при наведении
             heart.addEventListener('mouseenter', function() {
                 if (!isRevealed) {
-                    heart.style.transform = 'scale(1.1)';
+                    heartHint.style.transform = 'rotate(180deg) scale(1.2)';
                 }
             });
             
             heart.addEventListener('mouseleave', function() {
                 if (!isRevealed) {
-                    heart.style.transform = 'scale(1)';
+                    heartHint.style.transform = 'rotate(180deg) scale(1)';
                 }
             });
             
@@ -921,25 +1175,30 @@
             }
         }
 
-        // 7. Оптимизированные эффекты прокрутки
-        function setupOptimizedScroll() {
+        // 8. Эффекты при прокрутке
+        function setupScrollEffects() {
             let ticking = false;
             
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        // Простая анимация появления карточек
+                        // Анимация карточек при появлении
                         const memories = document.querySelectorAll('.memory');
-                        const windowHeight = window.innerHeight;
-                        
-                        memories.forEach((memory, index) => {
+                        memories.forEach(memory => {
                             const rect = memory.getBoundingClientRect();
-                            
-                            if (rect.top < windowHeight * 0.85) {
+                            if (rect.top < window.innerHeight * 0.85) {
                                 memory.style.opacity = '1';
                                 memory.style.transform = 'translateY(0)';
                             }
                         });
+                        
+                        // Анимация сердечка при приближении
+                        const heartSection = document.querySelector('.love-section');
+                        const heartRect = heartSection.getBoundingClientRect();
+                        
+                        if (heartRect.top < window.innerHeight * 0.7) {
+                            document.querySelector('.heart-container').style.transform = 'scale(1.05)';
+                        }
                         
                         ticking = false;
                     });
@@ -948,16 +1207,23 @@
                 }
             });
             
-            // Запускаем начальную проверку
+            // Инициализация начального состояния
+            document.querySelectorAll('.memory').forEach(memory => {
+                memory.style.opacity = '0';
+                memory.style.transform = 'translateY(30px)';
+                memory.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            // Запустить начальную анимацию
             setTimeout(() => {
                 window.dispatchEvent(new Event('scroll'));
-            }, 300);
+            }, 500);
         }
 
         // Вспомогательная функция для конфетти пасхалки
         function createEasterEggConfetti() {
             const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa'];
-            const confettiCount = 30;
+            const confettiCount = 50;
             
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
@@ -966,47 +1232,68 @@
                 confetti.style.height = '10px';
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.borderRadius = '50%';
-                confetti.style.left = `${Math.random() * 100}vw`;
-                confetti.style.top = '50vh';
+                confetti.style.left = `${50}%`;
+                confetti.style.top = `${50}%`;
                 confetti.style.zIndex = '9999';
                 confetti.style.pointerEvents = 'none';
-                confetti.style.transform = 'translateZ(0)';
                 
                 document.body.appendChild(confetti);
                 
                 const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 200 + 100;
+                const distance = Math.random() * 300 + 100;
+                const rotation = Math.random() * 720;
                 
                 confetti.animate([
                     { 
-                        transform: 'translate(0, 0) scale(1)', 
+                        transform: 'translate(0, 0) rotate(0deg) scale(1)', 
                         opacity: 1 
                     },
                     { 
-                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`, 
+                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(${rotation}deg) scale(0)`, 
                         opacity: 0 
                     }
                 ], {
-                    duration: 1500,
-                    easing: 'ease-out'
+                    duration: 2000,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
                 }).onfinish = () => confetti.remove();
             }
         }
 
-        // Управление производительностью при скрытии вкладки
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                // Приостанавливаем тяжёлые анимации
-                document.querySelectorAll('.snowflake, .floating-element, .star').forEach(el => {
-                    el.style.animationPlayState = 'paused';
-                });
-            } else {
-                // Возобновляем анимации
-                document.querySelectorAll('.snowflake, .floating-element, .star').forEach(el => {
-                    el.style.animationPlayState = 'running';
-                });
-            }
-        });
+        // Случайные эффекты для оживления страницы
+        function setupRandomEffects() {
+            // Случайные сердечки
+            setInterval(() => {
+                if (Math.random() > 0.7 && !document.hidden) {
+                    createFloatingHeart();
+                }
+            }, 5000);
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'fixed';
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.top = '100vh';
+            heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+            heart.style.opacity = '0.7';
+            heart.style.zIndex = '9999';
+            heart.style.pointerEvents = 'none';
+            document.body.appendChild(heart);
+            
+            const animation = heart.animate([
+                { transform: 'translateY(0) scale(1)', opacity: 0.7 },
+                { transform: `translateY(-${window.innerHeight + 100}px) scale(0.5)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+            });
+            
+            animation.onfinish = () => heart.remove();
+        }
+
+        // Запускаем случайные эффекты
+        setTimeout(setupRandomEffects, 10000);
     </script>
 </body>
 </html>
