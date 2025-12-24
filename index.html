@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Новым Годом! 🎄</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c1e3e 0%, #1a1a2e 100%);
+            color: #f0f8ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Гирлянда */
+        .garland {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 10%,
+                #ff4d8d 10%, #ffcc00 15%,
+                transparent 15%, transparent 25%,
+                #00ffaa 25%, #00ccff 30%,
+                transparent 30%, transparent 40%,
+                #ff9966 40%, #ff66cc 45%,
+                transparent 45%, transparent 55%,
+                #cc66ff 55%, #66ccff 60%,
+                transparent 60%, transparent 70%,
+                #ff6666 70%, #ffcc00 75%,
+                transparent 75%
+            );
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .garland::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ffcc00, #ff9900);
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff9900;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Верхняя часть с ёлкой */
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tree {
+            font-size: 80px;
+            color: #2ecc71;
+            text-shadow: 0 0 20px #2ecc71;
+            margin-bottom: 20px;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { text-shadow: 0 0 10px #2ecc71; }
+            100% { text-shadow: 0 0 30px #2ecc71, 0 0 40px #2ecc71; }
+        }
+
+        .greeting {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ffcc00, #ff9966, #ff4d8d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 153, 102, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a3d9ff;
+            margin-top: 10px;
+        }
+
+        /* Основной контент */
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .memory {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff9966, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Обводка фотографий */
+        .photo-frame {
+            width: 100%;
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            position: relative;
+            border: 2px dashed rgba(255, 204, 0, 0.5);
+        }
+
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #ffcc00, #ff9966, #ff4d8d, #00ccff);
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 5s infinite linear;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        .photo {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #2c3e50, #4a6491);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a3d9ff;
+            font-size: 1.2rem;
+        }
+
+        .text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 20px 0;
+            color: #e6f2ff;
+            text-align: justify;
+        }
+
+        /* Финальная фраза */
+        .love-message {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 30px;
+        }
+
+        .love-text {
+            font-size: 2.8rem;
+            color: #ff4d8d;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 77, 141, 0.7);
+            margin-bottom: 15px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .signature {
+            font-size: 1.3rem;
+            color: #ffcc00;
+            font-style: italic;
+        }
+
+        /* Адаптация для телефонов */
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 2.2rem;
+            }
+            
+            .tree {
+                font-size: 60px;
+            }
+            
+            .love-text {
+                font-size: 2.2rem;
+            }
+            
+            .memory {
+                padding: 20px;
+            }
+            
+            .garland {
+                width: 3px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .greeting {
+                font-size: 1.8rem;
+            }
+            
+            .love-text {
+                font-size: 1.8rem;
+            }
+            
+            .text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="garland"></div>
+        
+        <div class="header">
+            <div class="tree">🎄</div>
+            <h1 class="greeting">HAPPY NEW YEAR</h1>
+            <p class="subtitle">Наша история в одном письме...</p>
+        </div>
+        
+        <div class="content">
+            <!-- ПЕРВЫЙ БЛОК ВОСПОМИНАНИЯ -->
+            <div class="memory">
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 1 ЗДЕСЬ -->
+                    Дорогая, с наступающим Новым Годом! Этот год был особенным, потому что в моей жизни появился ты. Помнишь, как мы впервые познакомились?...
+                </p>
+                
+                <div class="photo-frame">
+                    <!-- ВСТАВЬТЕ ФОТО 1 ЗДЕСЬ -->
+                    <!-- Замените src="photo1.jpg" на путь к вашей фотографии -->
+                    <div class="photo-placeholder">
+                        <i class="fas fa-heart" style="font-size: 3rem; color: #ff4d8d;"></i>
+                        <div style="margin-left: 15px;">Ваше фото 1</div>
+                    </div>
+                    <!-- <img src="photo1.jpg" class="photo" alt="Наше воспоминание"> -->
+                </div>
+                
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 2 ЗДЕСЬ -->
+                    Ты говорила, что это была случайность, но я верю, что это была судьба...
+                </p>
+            </div>
+            
+            <!-- ВТОРОЙ БЛОК ВОСПОМИНАНИЯ -->
+            <div class="memory">
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 3 ЗДЕСЬ -->
+                    А помнишь тот раз, когда мы разговаривали до самого утра? Ты рассказывала мне о Китае, а я - о России...
+                </p>
+                
+                <div class="photo-frame">
+                    <!-- ВСТАВЬТЕ ФОТО 2 ЗДЕСЬ -->
+                    <!-- Замените src="photo2.jpg" на путь к вашей фотографии -->
+                    <div class="photo-placeholder">
+                        <i class="fas fa-star" style="font-size: 3rem; color: #ffcc00;"></i>
+                        <div style="margin-left: 15px;">Ваше фото 2</div>
+                    </div>
+                    <!-- <img src="photo2.jpg" class="photo" alt="Наше воспоминание"> -->
+                </div>
+                
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 4 ЗДЕСЬ -->
+                    Иногда расстояние кажется таким большим, но когда я слышу твой голос, оно исчезает...
+                </p>
+            </div>
+            
+            <!-- ТРЕТИЙ БЛОК ВОСПОМИНАНИЯ -->
+            <div class="memory">
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 5 ЗДЕСЬ -->
+                    В Новом году я хочу пожелать нам больше таких моментов. Больше разговоров, больше смеха, больше планов на будущее...
+                </p>
+                
+                <div class="photo-frame">
+                    <!-- ВСТАВЬТЕ ФОТО 3 ЗДЕСЬ -->
+                    <!-- Замените src="photo3.jpg" на путь к вашей фотографии -->
+                    <div class="photo-placeholder">
+                        <i class="fas fa-gift" style="font-size: 3rem; color: #00ccff;"></i>
+                        <div style="margin-left: 15px;">Ваше фото 3</div>
+                    </div>
+                    <!-- <img src="photo3.jpg" class="photo" alt="Наше воспоминание"> -->
+                </div>
+                
+                <p class="text">
+                    <!-- ВСТАВЬТЕ ТЕКСТ 6 ЗДЕСЬ -->
+                    Знай, что несмотря на тысячи километров между нами, ты всегда в моем сердце...
+                </p>
+            </div>
+        </div>
+        
+        <div class="love-message">
+            <div class="love-text">我爱你</div>
+            <div class="signature">Твой навсегда...</div>
+        </div>
+    </div>
+
+    <script>
+        // Небольшая анимация для гирлянды
+        document.addEventListener('DOMContentLoaded', function() {
+            const garland = document.querySelector('.garland');
+            
+            // Создаем дополнительные огоньки на гирлянде
+            for (let i = 0; i < 15; i++) {
+                const light = document.createElement('div');
+                light.style.position = 'absolute';
+                light.style.top = `${10 + i * 60}px`;
+                light.style.left = '-6px';
+                light.style.width = '16px';
+                light.style.height = '16px';
+                light.style.borderRadius = '50%';
+                light.style.background = getRandomColor();
+                light.style.boxShadow = `0 0 10px ${getRandomColor()}`;
+                light.style.animation = `pulse ${1 + Math.random()}s infinite alternate`;
+                light.style.animationDelay = `${Math.random()}s`;
+                garland.appendChild(light);
+            }
+            
+            function getRandomColor() {
+                const colors = ['#ffcc00', '#ff9966', '#ff4d8d', '#00ccff', '#00ffaa', '#cc66ff'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // Конфетти при загрузке
+            setTimeout(createConfetti, 500);
+            
+            function createConfetti() {
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = ['❄️', '🎊', '🎉', '✨', '🌟'][Math.floor(Math.random() * 5)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.top = '-50px';
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.fontSize = `${Math.random() * 20 + 10}px`;
+                    confetti.style.opacity = '0.8';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.pointerEvents = 'none';
+                    document.body.appendChild(confetti);
+                    
+                    // Анимация падения
+                    const animation = confetti.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+                        { transform: `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 3000 + 2000,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    });
+                    
+                    animation.onfinish = () => confetti.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
