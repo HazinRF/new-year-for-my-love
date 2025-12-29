@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Для Самой Особенной 🎄</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,10 +21,11 @@
             --darker: #050716;
             --light: #fff;
             --glow: rgba(255, 51, 102, 0.3);
+            --soft-glow: rgba(255, 51, 102, 0.15);
         }
 
         body {
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #1a1a3e 100%);
+            background: linear-gradient(135deg, #0a0e2a 0%, #111636 40%, #1a1a3e 100%);
             color: var(--light);
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
@@ -40,7 +41,7 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         .star {
@@ -51,8 +52,8 @@
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Снег */
@@ -76,21 +77,21 @@
 
         /* Главный контейнер */
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
             z-index: 10;
         }
 
-        /* Анимированная гирлянда */
+        /* Гирлянда */
         .garland-container {
             position: fixed;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            max-width: 900px;
+            max-width: 960px;
             height: 100%;
             z-index: 5;
             pointer-events: none;
@@ -109,42 +110,33 @@
                 var(--accent) 30%,
                 transparent 40%
             );
-            animation: garlandFlow 4s infinite linear;
+            animation: garlandFlow 5s infinite linear;
         }
 
         @keyframes garlandFlow {
             0% { background-position: 0 0; }
-            100% { background-position: 0 100px; }
+            100% { background-position: 0 120px; }
         }
 
-        /* Шарики гирлянды */
         .garland-ball {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             left: 50%;
             transform: translateX(-50%);
-            animation: ballGlow 2s infinite alternate;
+            animation: ballGlow 2.2s infinite alternate;
         }
 
         @keyframes ballGlow {
-            0% { 
-                box-shadow: 0 0 5px currentColor, 0 0 10px currentColor; 
-                transform: translateX(-50%) scale(1);
-            }
-            100% { 
-                box-shadow: 0 0 15px currentColor, 0 0 25px currentColor; 
-                transform: translateX(-50%) scale(1.2);
-            }
+            0% { box-shadow: 0 0 8px currentColor; transform: translateX(-50%) scale(1); }
+            100% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; transform: translateX(-50%) scale(1.3); }
         }
 
         /* Заголовок */
         .header {
             text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            margin-bottom: 40px;
+            padding: 60px 20px 50px;
         }
 
         .tree-container {
@@ -154,20 +146,17 @@
         }
 
         .tree {
-            font-size: 100px;
+            font-size: 110px;
             color: #2ecc71;
-            text-shadow: 
-                0 0 20px #2ecc71,
-                0 0 40px #2ecc71,
-                0 0 60px #2ecc71;
-            animation: treeGlow 3s infinite alternate;
+            text-shadow: 0 0 30px #2ecc71, 0 0 60px #2ecc71;
+            animation: treeGlow 4s infinite alternate;
             position: relative;
             z-index: 1;
         }
 
         .tree-lights {
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
@@ -179,103 +168,64 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            animation: romanticTwinkle 1.5s infinite alternate;
-            box-shadow: 0 0 15px currentColor;
+            animation: romanticTwinkle 1.8s infinite alternate;
+            box-shadow: 0 0 20px currentColor;
         }
 
         @keyframes treeGlow {
-            0% { 
-                text-shadow: 0 0 20px #2ecc71, 0 0 40px #2ecc71;
-                transform: scale(1);
-            }
-            100% { 
-                text-shadow: 0 0 30px #2ecc71, 0 0 60px #2ecc71, 0 0 80px #2ecc71;
-                transform: scale(1.05);
-            }
+            0% { text-shadow: 0 0 30px #2ecc71, 0 0 60px #2ecc71; }
+            100% { text-shadow: 0 0 40px #2ecc71, 0 0 80px #2ecc71, 0 0 100px #2ecc71; }
         }
 
         @keyframes romanticTwinkle {
-            0% { 
-                opacity: 0.3; 
-                transform: scale(1); 
-                box-shadow: 0 0 10px currentColor;
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1.5); 
-                box-shadow: 0 0 25px currentColor, 0 0 35px currentColor;
-            }
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.6); }
         }
 
         .greeting {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin: 20px 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .greeting::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 10px;
-            font-weight: 300;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
             letter-spacing: 2px;
+            font-weight: 400;
         }
 
         /* Карточки воспоминаний */
         .memory {
-            background: linear-gradient(
-                145deg, 
-                rgba(255, 255, 255, 0.05) 0%, 
-                rgba(255, 255, 255, 0.02) 100%
-            );
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
             backdrop-filter: blur(20px);
-            border-radius: 25px;
-            padding: 35px;
-            margin-bottom: 50px;
+            border-radius: 30px;
+            padding: 45px;
+            margin-bottom: 70px;
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 80px var(--soft-glow);
+            transition: all 0.6s ease;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 100px rgba(255, 51, 102, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
         }
 
         .memory:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.6),
-                0 0 150px rgba(255, 51, 102, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 51, 102, 0.3);
+            transform: translateY(-20px);
+            box-shadow: 0 35px 80px rgba(0,0,0,0.7), 0 0 120px var(--soft-glow);
         }
 
         .memory::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
+            top: 0; left: 0; right: 0;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            border-radius: 30px 30px 0 0;
         }
 
         .memory-glow {
@@ -296,70 +246,61 @@
 
         .memory-date {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: 2.4rem;
             color: var(--accent);
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px var(--accent);
         }
 
         .text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 25px 0;
-            text-align: justify;
-            position: relative;
-            z-index: 2;
+            font-size: 1.35rem;
+            line-height: 2;
+            color: rgba(255,255,255,0.95);
+            margin: 30px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Фотографии */
+        /* Фото */
         .photo-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            perspective: 1000px;
+            max-width: 650px;
+            margin: 50px auto;
+            perspective: 1200px;
         }
 
         .photo-frame {
             position: relative;
-            padding: 15px;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            border-radius: 20px;
-            transform-style: preserve-3d;
+            padding: 20px;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.08), transparent);
+            border-radius: 25px;
             transition: transform 0.8s ease;
         }
 
         .photo-frame:hover {
-            transform: rotateY(5deg) rotateX(5deg);
+            transform: rotateY(8deg) rotateX(6deg);
         }
 
         .photo-frame::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            inset: -3px;
             background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--primary));
-            border-radius: 22px;
+            border-radius: 28px;
             z-index: -1;
-            opacity: 0.5;
-            animation: frameGlow 4s linear infinite;
+            animation: frameGlow 5s linear infinite;
             background-size: 400% 400%;
         }
 
         @keyframes frameGlow {
-            0% { background-position: 0% 50%; }
+            0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .photo {
             width: 100%;
-            border-radius: 15px;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             transition: transform 0.5s ease;
         }
 
@@ -367,39 +308,10 @@
             transform: scale(1.02);
         }
 
-        .photo-placeholder {
-            width: 100%;
-            height: 350px;
-            background: linear-gradient(45deg, #1a1a3e, #2c3e50);
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .photo-placeholder::before {
-            content: '';
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-            animation: placeholderShine 3s infinite linear;
-        }
-
-        @keyframes placeholderShine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        /* Финальное сообщение с новой структурой */
+        /* Финальная секция */
         .love-section {
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px 80px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -407,62 +319,34 @@
             align-items: center;
         }
 
-        /* Новый контейнер для сердечка и надписи */
         .heart-interactive-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 40px;
-            margin: 40px 0;
+            gap: 80px;
             flex-wrap: wrap;
+            margin: 60px 0;
             width: 100%;
             max-width: 800px;
         }
 
-        /* Контейнер с вертикальным текстом */
-        .vertical-text-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
         .click-hint {
+            font-size: 1.6rem;
             color: var(--accent);
-            font-size: 1.2rem;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transform: rotate(180deg);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 500;
             animation: hintPulse 2s infinite;
-            white-space: nowrap;
+            text-shadow: 0 0 10px var(--accent);
         }
 
         @keyframes hintPulse {
-            0%, 100% { 
-                opacity: 0.7; 
-                transform: rotate(180deg) scale(1); 
-            }
-            50% { 
-                opacity: 1; 
-                transform: rotate(180deg) scale(1.1); 
-            }
+            0%,100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
 
-        .click-hint i {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        /* Сердечко */
         .heart-container {
             position: relative;
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             cursor: pointer;
             transition: transform 0.3s ease;
             flex-shrink: 0;
@@ -481,9 +365,7 @@
             background: var(--primary);
             transform: rotate(45deg);
             animation: heartbeat 1.5s ease-in-out infinite;
-            box-shadow: 
-                0 0 50px var(--primary),
-                0 0 100px var(--primary);
+            box-shadow: 0 0 60px var(--primary), 0 0 120px var(--primary);
         }
 
         .heart::before,
@@ -511,31 +393,26 @@
             50% { transform: rotate(45deg) scale(1.1); }
         }
 
-        /* Сообщение любви */
         .love-messages {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 30px;
-            width: 100%;
+            margin-top: 40px;
         }
 
         .love-message {
-            font-size: 3.5rem;
+            font-size: 4.2rem;
             font-family: 'Dancing Script', cursive;
             color: var(--primary);
-            text-shadow: 
-                0 0 20px var(--primary),
-                0 0 40px var(--primary);
+            text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary);
             margin: 10px 0;
             animation: textGlow 2s infinite alternate;
         }
 
         .pronunciation {
-            font-size: 2rem;
+            font-size: 2.3rem;
             color: var(--accent);
-            margin-top: 5px;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         @keyframes textGlow {
@@ -543,10 +420,10 @@
             100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary), 0 0 80px var(--primary); }
         }
 
-        /* Секретная фотография - улучшенная версия */
+        /* Секретная фотография */
         .secret-photo-container {
             max-width: 600px;
-            margin: 40px auto 0;
+            margin: 50px auto 0;
             display: none;
             position: relative;
             z-index: 100;
@@ -554,92 +431,21 @@
 
         .secret-photo-frame {
             position: relative;
-            padding: 25px;
+            padding: 30px;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
             border-radius: 30px;
             border: 2px solid transparent;
-            box-shadow: 
-                0 0 60px rgba(255, 51, 102, 0.3),
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 60px rgba(255, 51, 102, 0.3), 0 20px 60px rgba(0, 0, 0, 0.8);
             overflow: hidden;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .secret-photo-frame::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--primary) 0%, 
-                var(--accent) 25%, 
-                var(--secondary) 50%, 
-                var(--accent) 75%, 
-                var(--primary) 100%);
-            border-radius: 32px;
-            z-index: -1;
-            opacity: 0;
-            animation: secretFrameGlow 3s ease-in-out forwards;
-            background-size: 400% 400%;
-        }
-
-        @keyframes secretFrameGlow {
-            0% { 
-                opacity: 0; 
-                background-position: 0% 50%; 
-                filter: blur(20px);
-            }
-            50% { 
-                opacity: 0.8; 
-                background-position: 100% 50%; 
-                filter: blur(10px);
-            }
-            100% { 
-                opacity: 0.6; 
-                background-position: 0% 50%; 
-                filter: blur(5px);
-            }
         }
 
         .secret-photo {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.9),
-                0 0 80px rgba(255, 204, 0, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 80px rgba(255, 204, 0, 0.4);
             transform: scale(0.8);
             opacity: 0;
-            animation: photoReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 0.3s;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.5s ease;
-        }
-
-        .secret-photo:hover {
-            transform: scale(1.02);
-        }
-
-        @keyframes photoReveal {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.8) rotateY(90deg) rotateX(45deg); 
-                filter: blur(20px) brightness(0.5);
-            }
-            50% { 
-                opacity: 0.5; 
-                transform: scale(1.05) rotateY(0deg) rotateX(0deg); 
-                filter: blur(5px) brightness(1.2);
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1) rotateY(0deg) rotateX(0deg); 
-                filter: blur(0px) brightness(1);
-            }
         }
 
         .photo-light-effect {
@@ -648,21 +454,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, 
-                rgba(255, 51, 102, 0.4) 0%,
-                rgba(0, 204, 255, 0.3) 30%,
-                rgba(255, 204, 0, 0.2) 60%,
-                transparent 80%);
+            background: radial-gradient(circle, rgba(255,51,102,0.4) 0%, rgba(0,204,255,0.3) 30%, rgba(255,204,0,0.2) 60%, transparent 80%);
             opacity: 0;
-            animation: lightEffect 2s ease-out forwards 0.5s;
-            z-index: 1;
             pointer-events: none;
-        }
-
-        @keyframes lightEffect {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-            100% { opacity: 0.4; transform: scale(1); }
         }
 
         .photo-sparkles {
@@ -685,35 +479,6 @@
             opacity: 0;
         }
 
-        @keyframes sparkleTwinkle {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0.3; transform: scale(0.8); }
-        }
-
-        .secret-caption {
-            margin-top: 25px;
-            font-style: italic;
-            color: var(--accent);
-            font-size: 1.3rem;
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 1.5s;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
-        }
-
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-
-        /* Таймер скрытия */
         .photo-timer {
             position: absolute;
             top: -25px;
@@ -731,19 +496,7 @@
             box-shadow: 0 0 20px var(--primary);
             z-index: 10;
             opacity: 0;
-            animation: timerAppear 0.5s ease forwards 0.5s;
             border: 3px solid var(--accent);
-        }
-
-        @keyframes timerAppear {
-            from { 
-                opacity: 0; 
-                transform: scale(0) rotate(-180deg); 
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1) rotate(0deg); 
-            }
         }
 
         .timer-progress {
@@ -751,13 +504,6 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: conic-gradient(transparent 0deg, transparent 0deg);
-            animation: timerProgress 60s linear forwards;
-        }
-
-        @keyframes timerProgress {
-            from { background: conic-gradient(transparent 0deg, transparent 0deg); }
-            to { background: conic-gradient(var(--accent) 360deg, transparent 360deg); }
         }
 
         .timer-number {
@@ -772,54 +518,31 @@
             justify-content: center;
         }
 
-        /* Новые романтичные элементы */
-        .romantic-element {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.5;
+        .secret-caption {
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
         }
 
-        .floating-heart {
-            animation: floatRomantic 20s linear infinite;
-            font-size: 24px;
-            text-shadow: 0 0 10px var(--primary);
-        }
-
-        @keyframes floatRomantic {
-            0% { 
-                transform: translateY(100vh) translateX(0) rotate(0deg); 
-                opacity: 0; 
-            }
-            10% { 
-                opacity: 0.7; 
-            }
-            90% { 
-                opacity: 0.7; 
-            }
-            100% { 
-                transform: translateY(-100px) translateX(100px) rotate(360deg); 
-                opacity: 0; 
-            }
-        }
-
+        /* Подпись и время */
         .signature {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             color: var(--accent);
             font-style: italic;
-            opacity: 0.8;
-            margin-top: 40px;
+            opacity: 0.9;
+            margin: 60px 0 40px;
         }
 
-        /* Время Екатеринбург - Шанхай */
         .time-display {
-            margin-top: 40px;
-            opacity: 0.6;
-            font-size: 1.1rem;
+            margin-top: 50px;
+            font-size: 1.2rem;
+            opacity: 0.8;
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
+            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
@@ -837,10 +560,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-        }
-
-        .city-icon {
-            font-size: 1.2rem;
         }
 
         .separator {
@@ -868,158 +587,118 @@
             100% { transform: translateY(-100vh) rotate(360deg); }
         }
 
+        /* Кнопка новогоднего письма */
+        .letter-button {
+            margin: 100px auto 60px;
+            padding: 18px 50px;
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent);
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255,204,0,0.3);
+            display: block;
+        }
+
+        .letter-button:hover {
+            background: rgba(255,204,0,0.15);
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255,204,0,0.5);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+            backdrop-filter: blur(20px);
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 60px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 100px var(--soft-glow);
+            position: relative;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 2.8rem;
+            color: var(--accent);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            color: var(--accent);
+            margin-bottom: 40px;
+        }
+
+        .letter-text {
+            font-size: 1.4rem;
+            line-height: 2.2;
+            color: rgba(255,255,255,0.95);
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         /* Адаптивность */
         @media (max-width: 768px) {
-            .greeting {
-                font-size: 2.5rem;
-            }
-            
-            .love-message {
-                font-size: 2.8rem;
-            }
-            
-            .tree {
-                font-size: 80px;
-            }
-            
-            .memory {
-                padding: 25px;
-            }
-            
-            .text {
-                font-size: 1.1rem;
-            }
-            
-            .heart-container {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .heart-interactive-container {
-                gap: 20px;
-                flex-direction: column;
-            }
-            
-            .click-hint {
-                writing-mode: horizontal-tb;
-                transform: none;
-                margin-bottom: 0;
-                margin-right: 0;
-                margin-left: 0;
-            }
-            
-            .click-hint i {
-                margin-right: 10px;
-                margin-bottom: 0;
-            }
-            
-            .vertical-text-container {
-                order: -1;
-            }
-            
-            .secret-photo-frame {
-                padding: 15px;
-            }
-            
-            .secret-photo {
-                border-radius: 15px;
-            }
-            
-            .photo-timer {
-                width: 50px;
-                height: 50px;
-                top: -20px;
-                right: -20px;
-                font-size: 1rem;
-            }
-            
-            .timer-number {
-                width: 36px;
-                height: 36px;
-            }
+            .greeting { font-size: 3rem; }
+            .subtitle { font-size: 1.3rem; }
+            .love-message { font-size: 3.2rem; }
+            .pronunciation { font-size: 2rem; }
+            .heart-interactive-container { gap: 30px; flex-direction: column; }
+            .click-hint { font-size: 1.4rem; order: -1; }
+            .heart-container { width: 160px; height: 160px; }
+            .memory { padding: 35px; }
+            .text { font-size: 1.25rem; }
+            .memory-date { font-size: 2.1rem; }
+            .letter-button { font-size: 1.6rem; padding: 16px 40px; }
         }
 
         @media (max-width: 480px) {
-            .greeting {
-                font-size: 2rem;
-            }
-            
-            .love-message {
-                font-size: 2.2rem;
-            }
-            
-            .pronunciation {
-                font-size: 1.5rem;
-            }
-            
-            .tree {
-                font-size: 60px;
-            }
-            
-            .memory {
-                padding: 20px;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .heart-container {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .click-hint {
-                font-size: 1rem;
-            }
-            
-            .cities {
-                flex-direction: column;
-                gap: 5px;
-            }
-            
-            .separator {
-                display: none;
-            }
-            
-            .secret-photo-frame {
-                padding: 10px;
-            }
-            
-            .secret-caption {
-                font-size: 1.1rem;
-            }
-            
-            .photo-timer {
-                width: 40px;
-                height: 40px;
-                top: -15px;
-                right: -15px;
-                font-size: 0.9rem;
-            }
-            
-            .timer-number {
-                width: 30px;
-                height: 30px;
-            }
+            .greeting { font-size: 2.5rem; }
+            .tree { font-size: 80px; }
+            .memory-date { font-size: 2rem; }
+            .text { font-size: 1.15rem; line-height: 1.9; }
+            .love-message { font-size: 2.8rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Анимированный фон -->
     <div class="bg-animation" id="bgAnimation"></div>
-    
-    <!-- Снег -->
     <div id="snow"></div>
-    
-    <!-- Парящие элементы -->
     <div class="floating-elements" id="floatingElements"></div>
-    
-    <!-- Гирлянда -->
     <div class="garland-container" id="garlandContainer"></div>
-    
+
     <div class="container">
-        <!-- Заголовок -->
         <div class="header">
             <div class="tree-container">
                 <div class="tree-lights" id="treeLights"></div>
@@ -1028,93 +707,68 @@
             <h1 class="greeting">新年快乐，宝宝</h1>
             <p class="subtitle">我们的爱从这里开始...</p>
         </div>
-        
-        <!-- Первое воспоминание -->
+
         <div class="memory">
             <div class="memory-glow"></div>
             <div class="memory-date">我们的相识</div>
-            
             <p class="text">
                 新年快乐，我亲爱的！还记得我们第一次开始交谈的那一天吗。你是如此害羞和可爱...
             </p>
-            
             <div class="photo-container">
                 <div class="photo-frame">
                     <img src="1.jpg" class="photo" alt="Наше первое фото">
                 </div>
             </div>
-            
             <p class="text">
                 你的笑声成了我生命中最美的音乐。每次你写信息给我，我的世界都变得更加明亮...
             </p>
         </div>
-        
-        <!-- Второе воспоминание -->
+
         <div class="memory">
             <div class="memory-glow"></div>
             <div class="memory-date">美妙的夜晚</div>
-            
             <p class="text">
                 还记得我们彻夜长谈的那些夜晚吗？和你在一起的时光让我感到无比幸福...
             </p>
-            
             <div class="photo-container">
                 <div class="photo-frame">
                     <img src="2.jpg" class="photo" alt="Наша беседа">
                 </div>
             </div>
-            
             <p class="text">
                 你已成为我生命的一部分。你的每一个故事都留在了我的心里...
             </p>
         </div>
-        
-        <!-- Третье воспоминание -->
+
         <div class="memory">
             <div class="memory-glow"></div>
             <div class="memory-date">共同的未来</div>
-            
             <p class="text">
                 在新的一年里，我梦想着终于见到你的那一天。想象着紧紧拥抱你，永远不放手...
             </p>
-            
             <div class="photo-container">
                 <div class="photo-frame">
                     <img src="3.jpg" class="photo" alt="Наше будущее">
                 </div>
             </div>
-            
             <p class="text">
                 距离只是对我们感情的考验。每一天都证明着，我们的爱比任何距离都更强大...
             </p>
         </div>
-        
-        <!-- Финальное сообщение с пасхалкой -->
+
         <div class="love-section">
-            <!-- Интерактивная область с сердечком и подсказкой -->
             <div class="heart-interactive-container">
-                <!-- Контейнер с вертикальным текстом -->
-                <div class="vertical-text-container">
-                    <div class="click-hint" id="heartHint">
-                        <i class="fas fa-hand-point-right"></i>
-                        点击心形
-                        <i class="fas fa-hand-point-left"></i>
-                    </div>
-                </div>
-                
-                <!-- Интерактивное сердечко -->
+                <div class="click-hint" id="heartHint">点击爱心哦 💖</div>
                 <div class="heart-container" id="secretHeart" title="Открой сюрприз!">
                     <div class="heart"></div>
                 </div>
             </div>
-            
-            <!-- Сообщения любви -->
+
             <div class="love-messages">
                 <div class="love-message">我爱你</div>
                 <div class="pronunciation">Wǒ ài nǐ</div>
             </div>
-            
-            <!-- Секретная фотография (скрыта изначально) -->
+
             <div class="secret-photo-container" id="secretPhotoContainer">
                 <div class="secret-photo-frame">
                     <div class="photo-timer" id="photoTimer">
@@ -1124,20 +778,17 @@
                     <div class="photo-light-effect"></div>
                     <div class="photo-sparkles" id="photoSparkles"></div>
                     <img src="secret.jpg" class="secret-photo" alt="Секретный сюрприз!">
-                    
                     <div class="secret-caption">
                         我们一定会在生活中拍下这张照片...
                     </div>
                 </div>
             </div>
-            
-            <!-- Подпись -->
+
             <p class="signature">
                 永远属于你的<br>
                 <span style="color: var(--light);">Danya</span>
             </p>
-            
-            <!-- Время Екатеринбург - Шанхай -->
+
             <div class="time-display">
                 <i class="fas fa-clock"></i>
                 <div class="cities">
@@ -1155,48 +806,80 @@
                 </div>
             </div>
         </div>
+
+        <div style="text-align: center;">
+            <button class="letter-button" id="openLetter">新年信件</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно с письмом -->
+    <div class="modal" id="letterModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">×</span>
+            <h2 class="letter-title">新年信件</h2>
+            <div class="letter-text">
+                亲爱的宝宝，<br><br>
+
+                在这个特别的日子里，我要真诚地祝你幸福、健康、成功，以及你所希望的一切美好。<br><br>
+
+                我们已经每天聊天整整半年了。我们经历过各种情况，有快乐的，也有伤心的，但我们始终在一起——这是我感受到的最美妙的感觉。<br><br>
+
+                我爱你胜过生命。你让这半年成为我人生中最闪耀的时光，你在我心里点燃了火花，你温暖了我冰冷的心，正是因为你，我重新相信了爱情。<br><br>
+
+                你如此真诚、善良、诚实。在新的一年里，我希望你继续保持这样耀眼、美丽、善良和真诚的样子。你比任何星星都闪亮。<br>
+                你的潜力无限巨大，我坚信你一定能实现自己的梦想。<br><br>
+
+                我们还要一起走很长很长的路。我相信我们一定能携手走下去。<br><br>
+
+                请许一个愿吧。你最真挚的愿望一定会实现。最重要的是，不要放弃。<br>
+                我随时都会支持你。我会永远在你身边，绝不放手。<br>
+                你是我这辈子遇到的最耀眼、最美好的那个人。<br><br>
+
+                一定要帮我向妈妈问好哦！从俄罗斯向你问好！<br><br>
+
+                新年快乐！新的幸福！新的机会！你是最美的。<br><br><br>
+
+                爱你的，<br>
+                Danya<br>
+                2025年12月
+            </div>
+        </div>
     </div>
 
     <script>
-        // Инициализация всех эффектов
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Звёздное небо
             createStars();
-            
-            // 2. Снегопад
             createSnow();
-            
-            // 3. Гирлянда
             createGarland();
-            
-            // 4. Огни на ёлке
             createTreeLights();
-            
-            // 5. Парящие элементы
             createFloatingElements();
-            
-            // 6. Обновление времени Екатеринбург-Шанхай
             updateTime();
-            
-            // 7. Пасхалка - обработчик клика на сердце
             setupEasterEgg();
-            
-            // 8. Эффекты при прокрутке
             setupScrollEffects();
-            
-            // 9. Случайные эффекты
             setTimeout(setupRandomEffects, 10000);
+
+            // Модальное окно письма
+            document.getElementById('openLetter').addEventListener('click', () => {
+                document.getElementById('letterModal').style.display = 'flex';
+            });
+
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('letterModal').style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('letterModal')) {
+                    document.getElementById('letterModal').style.display = 'none';
+                }
+            });
         });
 
-        // 1. Создание звёздного неба
         function createStars() {
             const container = document.getElementById('bgAnimation');
             const starCount = 150;
-            
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
                 const size = Math.random() * 3 + 1;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
@@ -1205,29 +888,23 @@
                 star.style.opacity = Math.random() * 0.7 + 0.3;
                 star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
                 star.style.animationDelay = `${Math.random() * 5}s`;
-                
                 container.appendChild(star);
             }
         }
 
-        // 2. Создание снега
         function createSnow() {
             const snowContainer = document.getElementById('snow');
             const snowflakeCount = 80;
-            
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
-                
                 const size = Math.random() * 5 + 2;
                 snowflake.style.width = `${size}px`;
                 snowflake.style.height = `${size}px`;
                 snowflake.style.left = `${Math.random() * 100}vw`;
                 snowflake.style.opacity = Math.random() * 0.6 + 0.2;
-                
                 const duration = Math.random() * 10 + 10;
                 const delay = Math.random() * 5;
-                
                 snowflake.animate([
                     { transform: 'translateY(-100px) rotate(0deg)', opacity: 0 },
                     { transform: `translateY(${window.innerHeight + 100}px) rotate(${360 * (Math.random() > 0.5 ? 1 : -1)}deg)`, opacity: 0.3 }
@@ -1236,123 +913,76 @@
                     delay: delay * 1000,
                     iterations: Infinity
                 });
-                
                 snowContainer.appendChild(snowflake);
             }
         }
 
-        // 3. Создание гирлянды
         function createGarland() {
             const container = document.getElementById('garlandContainer');
             const ballCount = 15;
-            
-            // Линия гирлянды
             const line = document.createElement('div');
             line.className = 'garland-line';
             container.appendChild(line);
-            
-            // Шарики гирлянды
             for (let i = 0; i < ballCount; i++) {
                 const ball = document.createElement('div');
                 ball.className = 'garland-ball';
-                
                 const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa', '#cc66ff'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                
                 ball.style.backgroundColor = color;
                 ball.style.top = `${(i / ballCount) * 100}%`;
                 ball.style.animationDelay = `${Math.random() * 2}s`;
-                ball.style.setProperty('--color', color);
-                
                 container.appendChild(ball);
             }
         }
 
-        // 4. Огни на ёлке
         function createTreeLights() {
             const container = document.getElementById('treeLights');
             const lightCount = 20;
-            
             for (let i = 0; i < lightCount; i++) {
                 const light = document.createElement('div');
                 light.className = 'tree-light';
-                
                 const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa', '#ffffff'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                
                 light.style.backgroundColor = color;
                 light.style.left = `${Math.random() * 100}%`;
                 light.style.top = `${Math.random() * 100}%`;
                 light.style.animationDelay = `${Math.random() * 2}s`;
-                light.style.setProperty('--color', color);
-                
                 container.appendChild(light);
             }
         }
 
-        // 5. Парящие элементы
         function createFloatingElements() {
             const container = document.getElementById('floatingElements');
             const elements = ['❄️', '✨', '🌟', '🎀', '💫', '🎈', '💖', '🎇'];
             const count = 15;
-            
             for (let i = 0; i < count; i++) {
                 const element = document.createElement('div');
                 element.className = 'floating-element';
                 element.textContent = elements[Math.floor(Math.random() * elements.length)];
-                
                 element.style.left = `${Math.random() * 100}vw`;
                 element.style.fontSize = `${Math.random() * 20 + 15}px`;
                 element.style.opacity = Math.random() * 0.3 + 0.1;
                 element.style.animationDuration = `${Math.random() * 30 + 20}s`;
                 element.style.animationDelay = `${Math.random() * 10}s`;
-                
                 container.appendChild(element);
             }
         }
 
-        // 6. Обновление времени Екатеринбург-Шанхай
         function updateTime() {
             const ekbElement = document.getElementById('ekaterinburgTime');
             const shElement = document.getElementById('shanghaiTime');
-            
             function update() {
                 const now = new Date();
-                
-                // Время Екатеринбурга (UTC+5)
-                const ekbTime = new Date(now.getTime() + (0 * 60 * 60 * 1000));
-                
-                // Время Шанхая (UTC+8)
-                const shTime = new Date(now.getTime() + (3 * 60 * 60 * 1000));
-                
-                const formatTime = (date) => {
-                    return date.toLocaleTimeString('ru-RU', { 
-                        hour: '2-digit', 
-                        minute: '2-digit',
-                        hour12: false 
-                    });
-                };
-                
+                const ekbTime = new Date(now.getTime());
+                const shTime = new Date(now.getTime() + 3 * 60 * 60 * 1000); // Шанхай UTC+8, разница +3 часа от Екатеринбурга
+                const formatTime = (date) => date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', hour12: false });
                 ekbElement.textContent = formatTime(ekbTime);
                 shElement.textContent = formatTime(shTime);
-                
-                // Добавляем мерцание каждую минуту
-                if (now.getSeconds() === 0) {
-                    ekbElement.style.color = 'var(--accent)';
-                    shElement.style.color = 'var(--accent)';
-                    
-                    setTimeout(() => {
-                        ekbElement.style.color = '';
-                        shElement.style.color = '';
-                    }, 500);
-                }
             }
-            
             update();
-            setInterval(update, 1000); // Обновлять каждую секунду
+            setInterval(update, 1000);
         }
 
-        // 7. Пасхалка - клик на сердце
         function setupEasterEgg() {
             const heart = document.getElementById('secretHeart');
             const secretContainer = document.getElementById('secretPhotoContainer');
@@ -1360,316 +990,187 @@
             const photoTimer = document.getElementById('photoTimer');
             const timerNumber = document.getElementById('timerNumber');
             const photoSparkles = document.getElementById('photoSparkles');
-            
+            const secretPhoto = secretContainer.querySelector('.secret-photo');
+            const lightEffect = secretContainer.querySelector('.photo-light-effect');
+
             let isRevealed = false;
             let hideTimeout = null;
             let timerInterval = null;
-            
+
             heart.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 if (!isRevealed) {
-                    // Показываем секретную фотографию
                     secretContainer.style.display = 'block';
-                    
-                    // Сбрасываем предыдущую анимацию
-                    secretContainer.style.animation = 'none';
-                    void secretContainer.offsetWidth; // Триггер перерисовки
-                    
-                    // Запускаем анимацию появления
-                    secretContainer.style.animation = 'photoReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
-                    
-                    // Анимация для сердечка
+
+                    // Анимация появления фото
+                    secretPhoto.style.animation = 'photoReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 0.3s';
+                    lightEffect.style.animation = 'lightEffect 2s ease-out forwards 0.5s';
+
+                    // Пульсация сердца
                     heart.animate([
                         { transform: 'scale(1)' },
                         { transform: 'scale(1.4)' },
                         { transform: 'scale(1)' }
-                    ], {
-                        duration: 600,
-                        easing: 'ease-in-out'
-                    });
-                    
-                    // Скрываем подсказку
+                    ], { duration: 600, easing: 'ease-in-out' });
+
+                    // Скрытие подсказки
                     heartHint.animate([
-                        { opacity: 1, transform: 'rotate(180deg) scale(1)' },
-                        { opacity: 0, transform: 'rotate(180deg) scale(0.5)' }
-                    ], {
-                        duration: 500,
-                        easing: 'ease-out'
-                    }).onfinish = () => {
-                        heartHint.style.display = 'none';
-                    };
-                    
-                    // Создаём искры вокруг фотографии
+                        { opacity: 1 },
+                        { opacity: 0 }
+                    ], { duration: 500 }).onfinish = () => heartHint.style.display = 'none';
+
                     createPhotoSparkles(photoSparkles);
-                    
-                    // Запускаем таймер скрытия
                     startHideTimer();
-                    
-                    // Создаём эффект конфетти
                     createEasterEggConfetti();
-                    
-                    // Воспроизводим звуковой эффект (вибрация на мобильных)
-                    if (navigator.vibrate) {
-                        navigator.vibrate([100, 50, 100, 50, 100]);
-                    }
-                    
-                    // Создаём романтичные парящие сердечки
+                    if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]);
                     createRomanticHearts();
-                    
+
                     isRevealed = true;
-                    
-                    // Меняем курсор
                     heart.style.cursor = 'default';
-                    
-                    // Сохраняем в localStorage
+
                     try {
                         localStorage.setItem('easterEggRevealed', 'true');
                         localStorage.setItem('easterEggDate', new Date().toISOString());
-                    } catch (e) {
-                        // Игнорируем ошибки localStorage
-                    }
+                    } catch (e) {}
                 }
             });
-            
-            // Функция для создания искр вокруг фотографии
+
             function createPhotoSparkles(container) {
                 container.innerHTML = '';
-                const sparkleCount = 30;
-                
-                for (let i = 0; i < sparkleCount; i++) {
+                for (let i = 0; i < 30; i++) {
                     const sparkle = document.createElement('div');
                     sparkle.className = 'sparkle';
-                    
                     sparkle.style.left = `${Math.random() * 100}%`;
                     sparkle.style.top = `${Math.random() * 100}%`;
                     sparkle.style.animationDelay = `${Math.random() * 2}s`;
                     sparkle.style.animation = `sparkleTwinkle ${Math.random() * 2 + 1}s infinite alternate`;
-                    
-                    // Разные цвета искр
                     const colors = ['#ff3366', '#00ccff', '#ffcc00', '#ffffff'];
-                    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    sparkle.style.boxShadow = `0 0 10px ${sparkle.style.background}, 0 0 20px ${sparkle.style.background}`;
-                    
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    sparkle.style.background = color;
+                    sparkle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
                     container.appendChild(sparkle);
-                    
-                    // Анимация появления
-                    setTimeout(() => {
-                        sparkle.style.opacity = '1';
-                    }, Math.random() * 500);
+                    setTimeout(() => sparkle.style.opacity = '1', Math.random() * 500);
                 }
             }
-            
-            // Функция запуска таймера скрытия
+
             function startHideTimer() {
                 photoTimer.style.display = 'flex';
+                photoTimer.style.opacity = '1';
                 let seconds = 60;
-                
                 const updateTimer = () => {
                     timerNumber.textContent = seconds;
                     seconds--;
-                    
                     if (seconds < 0) {
                         clearInterval(timerInterval);
-                        photoTimer.style.display = 'none';
                         hideSecretPhoto();
                     }
                 };
-                
                 updateTimer();
                 timerInterval = setInterval(updateTimer, 1000);
-                
-                // Автоматическое скрытие через 1 минуту
-                hideTimeout = setTimeout(() => {
-                    hideSecretPhoto();
-                }, 60000); // 60 секунд
+                hideTimeout = setTimeout(hideSecretPhoto, 60000);
             }
-            
-            // Функция скрытия фотографии
+
             function hideSecretPhoto() {
                 if (!isRevealed) return;
-                
-                // Анимация скрытия
                 secretContainer.animate([
                     { opacity: 1, transform: 'scale(1)' },
-                    { opacity: 0, transform: 'scale(0.8) rotateY(20deg)' }
-                ], {
-                    duration: 800,
-                    easing: 'ease-in-out'
-                }).onfinish = () => {
+                    { opacity: 0, transform: 'scale(0.8)' }
+                ], { duration: 800, easing: 'ease-in-out' }).onfinish = () => {
                     secretContainer.style.display = 'none';
                     photoTimer.style.display = 'none';
-                    heartHint.style.display = 'flex';
+                    heartHint.style.display = 'block';
                     heartHint.style.opacity = '1';
-                    heartHint.style.transform = 'rotate(180deg) scale(1)';
                     isRevealed = false;
                     heart.style.cursor = 'pointer';
-                    
-                    // Очищаем таймеры
-                    if (hideTimeout) {
-                        clearTimeout(hideTimeout);
-                        hideTimeout = null;
-                    }
-                    if (timerInterval) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                    }
+                    secretPhoto.style.animation = 'none';
+                    lightEffect.style.animation = 'none';
+                    if (hideTimeout) clearTimeout(hideTimeout);
+                    if (timerInterval) clearInterval(timerInterval);
                 };
             }
-            
-            // Создание романтичных парящих сердечек
+
             function createRomanticHearts() {
-                const heartCount = 15;
                 const heartsContainer = document.createElement('div');
                 heartsContainer.style.position = 'fixed';
-                heartsContainer.style.top = '0';
-                heartsContainer.style.left = '0';
-                heartsContainer.style.width = '100%';
-                heartsContainer.style.height = '100%';
+                heartsContainer.style.inset = '0';
                 heartsContainer.style.pointerEvents = 'none';
                 heartsContainer.style.zIndex = '9998';
                 document.body.appendChild(heartsContainer);
-                
-                for (let i = 0; i < heartCount; i++) {
-                    const heart = document.createElement('div');
-                    heart.className = 'romantic-element floating-heart';
-                    heart.innerHTML = '💖';
-                    heart.style.position = 'absolute';
-                    heart.style.left = `${Math.random() * 100}vw`;
-                    heart.style.fontSize = `${Math.random() * 20 + 20}px`;
-                    heart.style.opacity = '0';
-                    heart.style.animationDelay = `${Math.random() * 2}s`;
-                    heart.style.animationDuration = `${Math.random() * 10 + 15}s`;
-                    
-                    heartsContainer.appendChild(heart);
-                    
-                    // Удаляем контейнер после анимации
-                    setTimeout(() => {
-                        heart.remove();
-                        if (heartsContainer.children.length === 0) {
-                            heartsContainer.remove();
-                        }
-                    }, 25000);
+                for (let i = 0; i < 15; i++) {
+                    const h = document.createElement('div');
+                    h.textContent = '💖';
+                    h.style.position = 'absolute';
+                    h.style.left = `${Math.random() * 100}vw`;
+                    h.style.bottom = '-50px';
+                    h.style.fontSize = `${Math.random() * 20 + 20}px`;
+                    h.style.opacity = '0.7';
+                    h.style.animation = `floatRomantic ${Math.random() * 10 + 15}s linear infinite`;
+                    heartsContainer.appendChild(h);
+                }
+                setTimeout(() => heartsContainer.remove(), 25000);
+            }
+
+            function createEasterEggConfetti() {
+                const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa'];
+                for (let i = 0; i < 50; i++) {
+                    const c = document.createElement('div');
+                    c.style.position = 'fixed';
+                    c.style.width = '10px';
+                    c.style.height = '10px';
+                    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    c.style.borderRadius = '50%';
+                    c.style.left = '50%';
+                    c.style.top = '50%';
+                    c.style.zIndex = '9999';
+                    c.style.pointerEvents = 'none';
+                    document.body.appendChild(c);
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = Math.random() * 300 + 100;
+                    const rotation = Math.random() * 720;
+                    c.animate([
+                        { transform: 'translate(0,0) rotate(0deg) scale(1)', opacity: 1 },
+                        { transform: `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) rotate(${rotation}deg) scale(0)`, opacity: 0 }
+                    ], { duration: 2000, easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)' }).onfinish = () => c.remove();
                 }
             }
-            
-            // Проверяем, была ли уже открыта пасхалка
-            try {
-                if (localStorage.getItem('easterEggRevealed') === 'true') {
-                    secretContainer.style.display = 'none'; // Скрываем по умолчанию
-                    heartHint.style.display = 'flex';
-                    isRevealed = false;
-                    heart.style.cursor = 'pointer';
-                }
-            } catch (e) {
-                // Игнорируем ошибки localStorage
-            }
-            
-            // Анимация подсказки при наведении
-            heart.addEventListener('mouseenter', function() {
-                if (!isRevealed) {
-                    heartHint.style.transform = 'rotate(180deg) scale(1.2)';
-                    heartHint.style.color = 'var(--primary)';
-                    heartHint.style.textShadow = '0 0 10px var(--primary)';
-                }
+
+            // Подсказка при наведении
+            heart.addEventListener('mouseenter', () => {
+                if (!isRevealed) heartHint.style.transform = 'scale(1.1)';
             });
-            
-            heart.addEventListener('mouseleave', function() {
-                if (!isRevealed) {
-                    heartHint.style.transform = 'rotate(180deg) scale(1)';
-                    heartHint.style.color = 'var(--accent)';
-                    heartHint.style.textShadow = 'none';
-                }
+            heart.addEventListener('mouseleave', () => {
+                if (!isRevealed) heartHint.style.transform = 'scale(1)';
             });
         }
 
-        // 8. Эффекты при прокрутке
         function setupScrollEffects() {
             let ticking = false;
-            
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', () => {
                 if (!ticking) {
-                    requestAnimationFrame(function() {
-                        // Анимация карточек при появлении
-                        const memories = document.querySelectorAll('.memory');
-                        memories.forEach(memory => {
+                    requestAnimationFrame(() => {
+                        document.querySelectorAll('.memory').forEach(memory => {
                             const rect = memory.getBoundingClientRect();
                             if (rect.top < window.innerHeight * 0.85) {
                                 memory.style.opacity = '1';
                                 memory.style.transform = 'translateY(0)';
                             }
                         });
-                        
-                        // Анимация сердечка при приближении
-                        const heartSection = document.querySelector('.love-section');
-                        const heartRect = heartSection.getBoundingClientRect();
-                        
-                        if (heartRect.top < window.innerHeight * 0.7) {
-                            document.querySelector('.heart-container').style.transform = 'scale(1.05)';
-                        }
-                        
                         ticking = false;
                     });
-                    
                     ticking = true;
                 }
             });
-            
-            // Инициализация начального состояния
+
             document.querySelectorAll('.memory').forEach(memory => {
                 memory.style.opacity = '0';
                 memory.style.transform = 'translateY(30px)';
                 memory.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             });
-            
-            // Запустить начальную анимацию
-            setTimeout(() => {
-                window.dispatchEvent(new Event('scroll'));
-            }, 500);
+
+            setTimeout(() => window.dispatchEvent(new Event('scroll')), 500);
         }
 
-        // Вспомогательная функция для конфетти пасхалки
-        function createEasterEggConfetti() {
-            const colors = ['#ff3366', '#00ccff', '#ffcc00', '#00ffaa'];
-            const confettiCount = 50;
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.borderRadius = '50%';
-                confetti.style.left = `${50}%`;
-                confetti.style.top = `${50}%`;
-                confetti.style.zIndex = '9999';
-                confetti.style.pointerEvents = 'none';
-                
-                document.body.appendChild(confetti);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 300 + 100;
-                const rotation = Math.random() * 720;
-                
-                confetti.animate([
-                    { 
-                        transform: 'translate(0, 0) rotate(0deg) scale(1)', 
-                        opacity: 1 
-                    },
-                    { 
-                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(${rotation}deg) scale(0)`, 
-                        opacity: 0 
-                    }
-                ], {
-                    duration: 2000,
-                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-                }).onfinish = () => confetti.remove();
-            }
-        }
-
-        // Случайные эффекты для оживления страницы
         function setupRandomEffects() {
-            // Случайные сердечки
             setInterval(() => {
                 if (Math.random() > 0.7 && !document.hidden) {
                     createFloatingHeart();
@@ -1679,7 +1180,7 @@
 
         function createFloatingHeart() {
             const heart = document.createElement('div');
-            heart.innerHTML = '💖';
+            heart.textContent = '💖';
             heart.style.position = 'fixed';
             heart.style.left = `${Math.random() * 100}vw`;
             heart.style.top = '100vh';
@@ -1688,17 +1189,41 @@
             heart.style.zIndex = '9999';
             heart.style.pointerEvents = 'none';
             document.body.appendChild(heart);
-            
-            const animation = heart.animate([
+            heart.animate([
                 { transform: 'translateY(0) scale(1)', opacity: 0.7 },
                 { transform: `translateY(-${window.innerHeight + 100}px) scale(0.5)`, opacity: 0 }
             ], {
                 duration: Math.random() * 3000 + 2000,
                 easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-            });
-            
-            animation.onfinish = () => heart.remove();
+            }).onfinish = () => heart.remove();
         }
+
+        // Анимации для секретного фото
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes photoReveal {
+                0% { opacity: 0; transform: scale(0.8) rotateY(90deg); filter: blur(20px); }
+                50% { opacity: 0.5; transform: scale(1.05); filter: blur(5px); }
+                100% { opacity: 1; transform: scale(1); filter: blur(0); }
+            }
+            @keyframes lightEffect {
+                0% { opacity: 0; transform: scale(0.5); }
+                50% { opacity: 0.8; transform: scale(1.1); }
+                100% { opacity: 0.4; transform: scale(1); }
+            }
+            @keyframes sparkleTwinkle {
+                0% { opacity: 0; transform: scale(0.5); }
+                50% { opacity: 1; transform: scale(1.2); }
+                100% { opacity: 0.3; transform: scale(0.8); }
+            }
+            @keyframes floatRomantic {
+                0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+                10% { opacity: 0.7; }
+                90% { opacity: 0.7; }
+                100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
